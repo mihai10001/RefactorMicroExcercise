@@ -8,6 +8,10 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
         private readonly Sensor _sensor = new Sensor();
         private bool _alarmOn = false;
 
+        public bool AlarmOn
+        {
+            get { return _alarmOn; }
+        }
 
         public void Check()
         {
@@ -18,11 +22,5 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
                 _alarmOn = true;
             }
         }
-
-        public bool AlarmOn
-        {
-            get { return _alarmOn; }
-        }
-
     }
 }
