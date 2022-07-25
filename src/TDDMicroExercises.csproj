@@ -36,9 +36,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Web" />
-    <Reference Include="nunit.framework">
-      <HintPath>lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
@@ -74,8 +71,6 @@
     <Folder Include="TelemetrySystem.SomeDependencies\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="lib\nunit.framework.dll" />
-    <None Include="lib\nunit.framework.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
