@@ -13,6 +13,13 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
             get { return _alarmOn; }
         }
 
+        public Alarm() {}
+
+        public Alarm(Sensor sensor)
+        {
+            _sensor = sensor;
+        }
+
         public void Check()
         {
             double psiPressureValue = _sensor.PopNextPressurePsiValue();
