@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using System.Web;
 
 namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
@@ -14,7 +15,7 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
 
         public string ConvertToHtml()
         {
-            StringBuilder html = new StringBuilder()
+            StringBuilder html = new StringBuilder();
 
             using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
             {
