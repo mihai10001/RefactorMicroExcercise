@@ -19,12 +19,10 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
 
             using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
             {
-                string line = unicodeFileStream.ReadLine();
-                while (line != null)
+                string line;
+                while ((line = unicodeFileStream.ReadLine()) != null)
                 {
-                    html += HttpUtility.HtmlEncode(line);
-                    html += "<br />";
-                    line = unicodeFileStream.ReadLine();
+                    html += HttpUtility.HtmlEncode(line) + "<br />";
                 }
             }
 
