@@ -7,7 +7,6 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
     {
         private readonly string _fullFilenameWithPath;
 
-
         public UnicodeFileToHtmlTextConverter(string fullFilenameWithPath)
         {
             _fullFilenameWithPath = fullFilenameWithPath;
@@ -27,7 +26,6 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
             }
 
             return html.ToString();
-            }
         }
     }
-
+}
