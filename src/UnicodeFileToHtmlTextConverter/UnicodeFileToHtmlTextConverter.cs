@@ -15,18 +15,18 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
 
         public string ConvertToHtml()
         {
-            string html = string.Empty;
+            StringBuilder html = new StringBuilder()
 
             using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
             {
                 string line;
                 while ((line = unicodeFileStream.ReadLine()) != null)
                 {
-                    html += HttpUtility.HtmlEncode(line) + "<br />";
+                    html.Append($"{HttpUtility.HtmlEncode(line)}<br />");
                 }
             }
 
-                return html;
+            return html.ToString();
             }
         }
     }
