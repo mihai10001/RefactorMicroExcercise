@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using System.Web;
@@ -15,6 +16,9 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
 
         public string ConvertToHtml()
         {
+            if (String.IsNullOrEmpty(_fullFilenameWithPath))
+                throw new ArgumentNullException(nameof(_fullFilenameWithPath), "Filename should not be empty!");
+
             StringBuilder html = new StringBuilder();
 
             using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
