@@ -15,10 +15,10 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
 
         public string ConvertToHtml()
         {
+            string html = string.Empty;
+
             using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
             {
-                string html = string.Empty;
-
                 string line = unicodeFileStream.ReadLine();
                 while (line != null)
                 {
@@ -26,9 +26,10 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter
                     html += "<br />";
                     line = unicodeFileStream.ReadLine();
                 }
+            }
 
                 return html;
             }
         }
     }
-}
+
