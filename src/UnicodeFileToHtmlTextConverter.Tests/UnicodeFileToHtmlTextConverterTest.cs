@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Web;
 using NUnit.Framework;
 
 namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter.Tests
@@ -46,6 +48,55 @@ namespace TDDMicroExercises.UnicodeFileToHtmlTextConverter.Tests
 
             DirectoryNotFoundException ex = Assert.Throws<DirectoryNotFoundException>(() => textConverter.ConvertToHtml());
             Assert.That(ex.Message, Does.StartWith("Could not find a part of the path"));
+        }
+
+        [Test]
+        public void ConvertToHtml_method_should_return_empty_string_when_file_content_is_empty()
+        {
+            string newFilenamePath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, Path.GetRandomFileName() });
+            using (FileStream fs = File.Create(newFilenamePath));
+
+            var textConverter = new UnicodeFileToHtmlTextConverter(newFilenamePath);
+            var resultedHtmlString = textConverter.ConvertToHtml();
+
+            Assert.AreEqual(resultedHtmlString, String.Empty);
+        }
+
+        [Test]
+        public void ConvertToHtml_method_should_return_converted_content_when_file_content_is_not_empty()
+        {
+            string fileContent = "<html>Example file content</html>";
+            string newFilenamePath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, Path.GetRandomFileName() });
+            using (FileStream fs = File.Create(newFilenamePath))
+            {
+                var info = new UTF8Encoding(true).GetBytes(fileContent);
+                fs.Write(info, 0, info.Length);
+            }
+
+            var textConverter = new UnicodeFileToHtmlTextConverter(newFilenamePath);
+            var resultedHtmlString = textConverter.ConvertToHtml();
+
+            Assert.AreEqual(resultedHtmlString, $"{HttpUtility.HtmlEncode(fileContent)}<br />");
+        }
+
+        [Test]
+        public void ConvertToHtml_method_should_return_converted_content_when_file_content_is_not_empty_multiple_lines()
+        {
+            string[] fileContentLines =
+            {
+                "<html>Example file content</html>",
+                "<style> .some-random-css { background-color: black } </style>"
+            };
+            string newFilenamePath = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, Path.GetRandomFileName() });
+            File.WriteAllLines(newFilenamePath, fileContentLines);
+
+            var textConverter = new UnicodeFileToHtmlTextConverter(newFilenamePath);
+            var resultedHtmlString = textConverter.ConvertToHtml();
+
+            Assert.AreEqual(resultedHtmlString,
+                $"{HttpUtility.HtmlEncode(fileContentLines[0])}<br />" +
+                $"{HttpUtility.HtmlEncode(fileContentLines[1])}<br />"
+            );
         }
     }
 }
